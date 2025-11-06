@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useTheme } from "@/lib/theme-provider"
 import { translations } from "@/lib/i18n"
-import { Home, Briefcase, Users, Settings, Newspaper } from "lucide-react"
+import { Home, Briefcase, Users, MessageSquare, Newspaper } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 
@@ -27,11 +27,11 @@ function MobileNavContent({ pathname }: { pathname: string }) {
     { href: "/services", icon: Briefcase, label: t.nav.services },
     { href: "/blog", icon: Newspaper, label: t.nav.blog },
     { href: "/about", icon: Users, label: t.nav.about },
-    { href: "/settings", icon: Settings, label: t.nav.settings },
+    { href: "/contact", icon: MessageSquare, label: t.nav.contact },
   ]
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:hidden">
       <div className="flex items-center justify-around">
         {navItems.map(({ href, icon: Icon, label }) => (
           <Link
