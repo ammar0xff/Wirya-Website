@@ -17,6 +17,7 @@ import {
   Search,
   Clock,
   Inbox,
+  FilterIcon as FooterIcon,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -98,6 +99,12 @@ export function AdminSidebar() {
       href: "/admin/newsletter",
     },
     {
+      icon: FooterIcon,
+      labelAr: "الفوتر",
+      labelEn: "Footer",
+      href: "/admin/content/footer",
+    },
+    {
       icon: Settings,
       labelAr: "الإعدادات",
       labelEn: "Settings",
@@ -116,7 +123,7 @@ export function AdminSidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 space-y-1 p-4">
+      <nav className="flex-1 space-y-1 p-4 overflow-y-auto">
         {menuItems.map((item, idx) => {
           const Icon = item.icon
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/")

@@ -281,10 +281,28 @@ export const contactPageContent: ContactPageContent = {
 
 export const ourStoryContent: OurStoryContent = null
 
-export const footerContent: FooterContent = null
+export const footerContent: FooterContent = {
+  companyDescAr: "شركة رائدة في مجال التحول الرقمي والتكنولوجيا، نقدم حلولاً مبتكرة لتطوير الأعمال",
+  companyDescEn:
+    "A leading company in digital transformation and technology, providing innovative solutions for business development",
+  quickLinks: [
+    { id: "services", labelAr: "الخدمات", labelEn: "Services", href: "/services" },
+    { id: "about", labelAr: "من نحن", labelEn: "About", href: "/about" },
+    { id: "blog", labelAr: "المدونة", labelEn: "Blog", href: "/blog" },
+    { id: "contact", labelAr: "اتصل بنا", labelEn: "Contact", href: "/contact" },
+  ],
+  services: [
+    { id: "support", labelAr: "الدعم الفني", labelEn: "Technical Support" },
+    { id: "transformation", labelAr: "التحول الرقمي", labelEn: "Digital Transformation" },
+    { id: "security", labelAr: "الأمان السيبراني", labelEn: "Cybersecurity" },
+    { id: "development", labelAr: "تطوير البرامج", labelEn: "Software Development" },
+  ],
+  copyrightAr: "جميع الحقوق محفوظة",
+  copyrightEn: "All rights reserved",
+}
 
 export const siteSettings: SiteSettings = {
-  siteName: "Wirya", // Changed from Werya to Wirya
+  siteName: "Wirya",
   logoUrl: "/logo.svg",
   favicon: "/favicon.ico",
   metaTitleAr: "",

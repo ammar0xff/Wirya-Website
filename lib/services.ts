@@ -42,7 +42,33 @@ export interface ServiceCategory {
   nameEn: string
 }
 
-export const serviceCategories: ServiceCategory[] = []
+export const serviceCategories: ServiceCategory[] = [
+  {
+    "id": "cat-1762126199121",
+    "nameAr": "أنظمة تشغيل",
+    "nameEn": "Operating Systems"
+  },
+  {
+    "id": "cat-1762126223203",
+    "nameAr": "إستعادة البيانات",
+    "nameEn": "Data Recovery"
+  },
+  {
+    "id": "cat-1762126296304",
+    "nameAr": "تصليح الكمبيوتر واللبتوب",
+    "nameEn": "Computer Repair"
+  },
+  {
+    "id": "cat-1762126339955",
+    "nameAr": "صيانة دورية",
+    "nameEn": "Periodic Maintenance"
+  },
+  {
+    "id": "cat-1762126362691",
+    "nameAr": "خدمات المواقع",
+    "nameEn": "Web Services"
+  }
+]
 
 export const services: Service[] = [
   {
