@@ -339,12 +339,15 @@ export const footerContent: FooterContent = {
 export const siteSettings: SiteSettings = {
   "siteName": "Wirya",
   "logoUrl": "/logo.svg",
-  "favicon": "/favicon.ico",
-  "metaTitleAr": "",
-  "metaTitleEn": "",
-  "metaDescAr": "",
-  "metaDescEn": "",
-  "whatsappNumber": "+201067790350"
+  "favicon": "/wirya.png",
+  "metaTitleAr": "وريا - يلا نخلي مشاكلك بدايات",
+  "metaTitleEn": "Wirya - Let's innovate",
+  "metaDescAr": "وريا هي شركة للتحول الرقمي للمؤسسات وخدمات الصيانة والدعم الفني للأفراد",
+  "metaDescEn": "Wirya is a digital transformation company; it is a company focused on digital transformation and expanding its agricultural and technical services.",
+  "whatsappNumber": "+201067790350",
+  "siteIcon": "/wirya.png",
+  "enableEcommerce": true,
+  "defaultCurrency": "EG"
 }
 
 export const newsletterSettings: NewsletterSettings = {
