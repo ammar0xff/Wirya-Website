@@ -71,13 +71,13 @@ export interface FooterContent {
 
 export interface SiteSettings {
   siteName: string
-  logoUrl: string // Fixed property name from siteIcon to logoUrl
+  logoUrl: string
   favicon: string
   metaTitleAr: string
   metaTitleEn: string
   metaDescAr: string
   metaDescEn: string
-  whatsappNumber: string // Added whatsappNumber property
+  whatsappNumber: string
 }
 
 export interface NewsletterSettings {
@@ -108,7 +108,7 @@ export interface Testimonial {
   companyEn: string
   contentAr: string
   contentEn: string
-  rating: number // 1-5 stars
+  rating: number
   imageUrl?: string
   serviceRelated?: string
   featured: boolean
@@ -265,51 +265,86 @@ export interface SEOData {
 export const aboutPageContent: AboutPageContent = null
 
 export const contactPageContent: ContactPageContent = {
-  email: "wirya.corp@gmail.com",
-  phone: "+201067790350",
-  socialLinks: {
-    facebook: "https://www.facebook.com/profile.php?id=61572786470172",
-    twitter: "#",
-    instagram: "https://www.instagram.com/wirya_llc/",
-    linkedin: "#",
-  },
-  addressAr: "مصر - السويس",
-  addressEn: "Egypt - Suez",
-  businessHoursAr: "كل ايام الاسبوع عدا الجمعة - 24 ساعة",
-  businessHoursEn: "All week except Friday - 24 hour",
+  "email": "wirya.corp@gmail.com",
+  "phone": "010 677 903 50",
+  "addressAr": "السويس, مصر",
+  "addressEn": "Suez, Egypt",
+  "businessHoursAr": "طوال الاسبوع (عدا الجمعة): 24 ساعة",
+  "businessHoursEn": "All Week (except Friday): 24h",
+  "socialLinks": {
+    "facebook": "https://facebook.com/wirya",
+    "twitter": "https://twitter.com/wirya",
+    "instagram": "https://instagram.com/wirya",
+    "linkedin": "https://linkedin.com/company/wirya"
+  }
 }
 
 export const ourStoryContent: OurStoryContent = null
 
 export const footerContent: FooterContent = {
-  companyDescAr: "شركة رائدة في مجال التحول الرقمي والتكنولوجيا، نقدم حلولاً مبتكرة لتطوير الأعمال",
-  companyDescEn:
-    "A leading company in digital transformation and technology, providing innovative solutions for business development",
-  quickLinks: [
-    { id: "services", labelAr: "الخدمات", labelEn: "Services", href: "/services" },
-    { id: "about", labelAr: "من نحن", labelEn: "About", href: "/about" },
-    { id: "blog", labelAr: "المدونة", labelEn: "Blog", href: "/blog" },
-    { id: "contact", labelAr: "اتصل بنا", labelEn: "Contact", href: "/contact" },
+  "companyDescAr": "شركة رائدة في مجال التحول الرقمي والتكنولوجيا، نقدم حلولاً مبتكرة لتطوير الأعمال",
+  "companyDescEn": "A leading company in digital transformation and technology, providing innovative solutions for business development",
+  "quickLinks": [
+    {
+      "id": "services",
+      "labelAr": "الخدمات",
+      "labelEn": "Services",
+      "href": "/services"
+    },
+    {
+      "id": "about",
+      "labelAr": "من نحن",
+      "labelEn": "About",
+      "href": "/about"
+    },
+    {
+      "id": "blog",
+      "labelAr": "المدونة",
+      "labelEn": "Blog",
+      "href": "/blog"
+    },
+    {
+      "id": "contact",
+      "labelAr": "اتصل بنا",
+      "labelEn": "Contact",
+      "href": "/contact"
+    }
   ],
-  services: [
-    { id: "support", labelAr: "الدعم الفني", labelEn: "Technical Support" },
-    { id: "transformation", labelAr: "التحول الرقمي", labelEn: "Digital Transformation" },
-    { id: "security", labelAr: "الأمان السيبراني", labelEn: "Cybersecurity" },
-    { id: "development", labelAr: "تطوير البرامج", labelEn: "Software Development" },
+  "services": [
+    {
+      "id": "support",
+      "labelAr": "الدعم الفني",
+      "labelEn": "Technical Support"
+    },
+    {
+      "id": "transformation",
+      "labelAr": "التحول الرقمي",
+      "labelEn": "Digital Transformation"
+    },
+    {
+      "id": "security",
+      "labelAr": "الأمان السيبراني",
+      "labelEn": "Cybersecurity"
+    },
+    {
+      "id": "development",
+      "labelAr": "تطوير البرامج",
+      "labelEn": "Software Development"
+    }
   ],
-  copyrightAr: "جميع الحقوق محفوظة",
-  copyrightEn: "All rights reserved",
+  "copyrightAr": "جميع الحقوق محفوظة",
+  "copyrightEn": "All rights reserved"
 }
 
 export const siteSettings: SiteSettings = {
-  siteName: "Wirya",
-  logoUrl: "/logo.svg",
-  favicon: "/favicon.ico",
-  metaTitleAr: "",
-  metaTitleEn: "",
-  metaDescAr: "",
-  metaDescEn: "",
-  whatsappNumber: "+201067790350",
+  "siteName": "Wirya",
+  "logoUrl": "/logo.svg",
+  "favicon": "/favicon.ico",
+  "metaTitleAr": "",
+  "metaTitleEn": "",
+  "metaDescAr": "",
+  "metaDescEn": "",
+  "whatsappNumber": "+201067790350"
 }
 
 export const newsletterSettings: NewsletterSettings = {
