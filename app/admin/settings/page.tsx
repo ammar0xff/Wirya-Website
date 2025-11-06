@@ -17,15 +17,16 @@ import {
   Phone,
   MessageCircle,
   ImageIcon,
-  SettingsIcon,
   Share2,
   FileText,
   CheckCircle2,
   AlertCircle,
+  Github,
 } from "lucide-react"
 import { useContentManager } from "@/hooks/use-content-manager"
 import { SyncService } from "@/lib/sync-service"
 import { siteSettings as defaultSiteSettings, contactPageContent as defaultContactContent } from "@/lib/site-content"
+import Link from "next/link"
 
 export const dynamic = "force-dynamic"
 
@@ -184,44 +185,38 @@ export default function AdminSettings() {
     <div className="pb-8 px-4 sm:px-0">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-          {language === "ar" ? "إعدادات الموقع" : "Site Settings"}
+          {language === "ar" ? "الإعدادات" : "Settings"}
         </h1>
         <p className="text-sm sm:text-base text-foreground/60">
-          {language === "ar"
-            ? "إدارة إعدادات الموقع والمعلومات العامة"
-            : "Manage site settings and general information"}
+          {language === "ar" ? "إدارة إعدادات الموقع والتفضيلات" : "Manage site settings and preferences"}
         </p>
       </div>
 
       <Tabs defaultValue="general" className="space-y-4 sm:space-y-6">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 h-auto p-1">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1 sm:gap-2 h-auto p-1">
           <TabsTrigger value="general" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
             <Globe className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">{language === "ar" ? "عام" : "General"}</span>
-            <span className="sm:hidden">{language === "ar" ? "عام" : "Gen"}</span>
+            <span>{language === "ar" ? "عام" : "General"}</span>
           </TabsTrigger>
           <TabsTrigger value="branding" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
             <ImageIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">{language === "ar" ? "العلامة التجارية" : "Branding"}</span>
-            <span className="sm:hidden">{language === "ar" ? "علامة" : "Brand"}</span>
+            <span>{language === "ar" ? "علامة" : "Brand"}</span>
           </TabsTrigger>
           <TabsTrigger value="contact" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
             <Mail className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">{language === "ar" ? "الاتصال" : "Contact"}</span>
-            <span className="sm:hidden">{language === "ar" ? "اتصال" : "Contact"}</span>
+            <span>{language === "ar" ? "اتصال" : "Contact"}</span>
           </TabsTrigger>
           <TabsTrigger value="social" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
             <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">{language === "ar" ? "التواصل" : "Social"}</span>
-            <span className="sm:hidden">{language === "ar" ? "تواصل" : "Social"}</span>
+            <span>{language === "ar" ? "تواصل" : "Social"}</span>
           </TabsTrigger>
-          <TabsTrigger
-            value="appearance"
-            className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5 col-span-2 sm:col-span-1"
-          >
-            <SettingsIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="hidden sm:inline">{language === "ar" ? "المظهر" : "Appearance"}</span>
-            <span className="sm:hidden">{language === "ar" ? "مظهر" : "Look"}</span>
+          <TabsTrigger value="appearance" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
+            <Sun className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span>{language === "ar" ? "مظهر" : "Theme"}</span>
+          </TabsTrigger>
+          <TabsTrigger value="github" className="gap-1 sm:gap-2 text-xs sm:text-sm py-2 sm:py-2.5">
+            <Github className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span>{language === "ar" ? "GitHub" : "GitHub"}</span>
           </TabsTrigger>
         </TabsList>
 
@@ -619,7 +614,7 @@ export default function AdminSettings() {
           <Card className="border border-border/40 bg-card/50 p-4 sm:p-6">
             <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <div className="p-1.5 sm:p-2 rounded-lg bg-accent/10">
-                <SettingsIcon className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+                <Sun className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
               </div>
               <div>
                 <h2 className="text-lg sm:text-xl font-semibold text-foreground">
@@ -687,6 +682,40 @@ export default function AdminSettings() {
                   </button>
                 </div>
               </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* GitHub Settings */}
+        <TabsContent value="github" className="space-y-4 sm:space-y-6">
+          <Card className="border border-border/40 bg-card/50 p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="p-1.5 sm:p-2 rounded-lg bg-accent/10">
+                <Github className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
+              </div>
+              <div>
+                <h2 className="text-lg sm:text-xl font-semibold text-foreground">
+                  {language === "ar" ? "إعدادات GitHub" : "GitHub Settings"}
+                </h2>
+                <p className="text-xs sm:text-sm text-foreground/60">
+                  {language === "ar" ? "إدارة مزامنة GitHub" : "Manage GitHub synchronization"}
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-sm text-foreground/70">
+                {language === "ar"
+                  ? "يتم تكوين إعدادات GitHub من خلال متغيرات البيئة. للحصول على تفاصيل حول الإعداد، راجع وثائق المشروع."
+                  : "GitHub settings are configured through environment variables. For setup details, refer to the project documentation."}
+              </p>
+
+              <Link href="/admin/settings/github">
+                <Button className="gap-2 bg-accent hover:bg-accent/90">
+                  <Github className="h-4 w-4" />
+                  {language === "ar" ? "إدارة إعدادات GitHub" : "Manage GitHub Settings"}
+                </Button>
+              </Link>
             </div>
           </Card>
         </TabsContent>

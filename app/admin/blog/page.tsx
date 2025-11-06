@@ -4,7 +4,8 @@ import { useTheme } from "@/lib/theme-provider"
 import { useEffect, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Plus, Edit2, Trash2, Upload, AlertCircle, Filter } from "lucide-react"
+import { Plus, Edit2, Trash2, Upload, AlertCircle } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 import { BLOG_POSTS } from "@/lib/blog-loader"
 import { useContentManager } from "@/hooks/use-content-manager"
@@ -15,7 +16,6 @@ export default function BlogManager() {
   const { state, manager, mounted } = useContentManager()
   const [isSyncing, setIsSyncing] = useState(false)
   const [syncStatus, setSyncStatus] = useState("")
-  const [statusFilter, setStatusFilter] = useState<"all" | "draft" | "published" | "archived">("all")
 
   useEffect(() => {
     if (state.blogPosts.length === 0) {
@@ -61,79 +61,23 @@ export default function BlogManager() {
     }
   }
 
-  const filteredPosts =
-    statusFilter === "all" ? state.blogPosts : state.blogPosts.filter((post) => post.status === statusFilter)
+  const allPosts = state.blogPosts
+  const publishedPosts = allPosts.filter((p) => p.status === "published")
+  const draftPosts = allPosts.filter((p) => p.status === "draft")
+  const scheduledPosts = allPosts.filter((p) => p.status === "scheduled")
 
-  const draftCount = state.blogPosts.filter((p) => p.status === "draft").length
-  const publishedCount = state.blogPosts.filter((p) => p.status === "published").length
-
-  return (
-    <div>
-      <div className="mb-8 flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">
-            {language === "ar" ? "إدارة المقالات" : "Manage Blog Posts"}
-          </h1>
-          <p className="mt-2 text-foreground/60">
-            {language === "ar"
-              ? `${publishedCount} منشور • ${draftCount} مسودة`
-              : `${publishedCount} published • ${draftCount} drafts`}
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <Button
-            onClick={handleSync}
-            disabled={isSyncing || !state.isDirty}
-            className="gap-2 bg-green-600 hover:bg-green-700 disabled:opacity-50"
-          >
-            <Upload className="h-4 w-4" />
-            {isSyncing ? "Syncing..." : language === "ar" ? "مزامنة" : "Sync"}
-          </Button>
-          <Link href="/admin/blog/new">
-            <Button className="gap-2 bg-accent hover:bg-accent/90">
-              <Plus className="h-4 w-4" />
-              {language === "ar" ? "كتابة مقال" : "Write Post"}
-            </Button>
-          </Link>
-        </div>
-      </div>
-
-      {state.isDirty && !syncStatus && (
-        <Card className="mb-6 border border-orange-500/40 bg-orange-500/10 p-4">
-          <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400">
-            <AlertCircle className="h-4 w-4" />
-            <p>{language === "ar" ? "لديك تغييرات غير محفوظة" : "You have unsaved changes"}</p>
-          </div>
+  const renderPosts = (posts: typeof allPosts) => (
+    <div className="grid gap-4">
+      {posts.length === 0 ? (
+        <Card className="border border-border/40 bg-card/50 p-12 text-center">
+          <p className="text-foreground/60">{language === "ar" ? "لا توجد مقالات" : "No posts found"}</p>
         </Card>
-      )}
-
-      {syncStatus && (
-        <Card className="mb-6 border border-border/40 bg-accent/10 p-4">
-          <p className="text-sm text-foreground">{syncStatus}</p>
-        </Card>
-      )}
-
-      <div className="mb-6 flex flex-wrap gap-2">
-        {["all", "published", "draft", "archived"].map((status) => (
-          <Button
-            key={status}
-            size="sm"
-            variant={statusFilter === status ? "default" : "outline"}
-            onClick={() => setStatusFilter(status as any)}
-            className="gap-2"
+      ) : (
+        posts.map((post) => (
+          <Card
+            key={post.id}
+            className="border border-border/40 bg-card/50 p-6 hover:border-accent/50 transition-colors"
           >
-            <Filter className="h-3 w-3" />
-            {status === "all" && (language === "ar" ? "الكل" : "All")}
-            {status === "published" && (language === "ar" ? "منشور" : "Published")}
-            {status === "draft" && (language === "ar" ? "مسودة" : "Draft")}
-            {status === "archived" && (language === "ar" ? "مؤرشف" : "Archived")}
-          </Button>
-        ))}
-      </div>
-
-      <div className="grid gap-4">
-        {filteredPosts.map((post) => (
-          <Card key={post.id} className="border border-border/40 bg-card/50 p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
@@ -146,12 +90,12 @@ export default function BlogManager() {
                         ? "bg-green-500/10 text-green-600 dark:text-green-400"
                         : post.status === "draft"
                           ? "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400"
-                          : "bg-gray-500/10 text-gray-600 dark:text-gray-400"
+                          : "bg-blue-500/10 text-blue-600 dark:text-blue-400"
                     }`}
                   >
                     {post.status === "published" && (language === "ar" ? "منشور" : "Published")}
                     {post.status === "draft" && (language === "ar" ? "مسودة" : "Draft")}
-                    {post.status === "archived" && (language === "ar" ? "مؤرشف" : "Archived")}
+                    {post.status === "scheduled" && (language === "ar" ? "مجدول" : "Scheduled")}
                   </span>
                 </div>
                 <h3 className="font-semibold text-foreground">{language === "ar" ? post.titleAr : post.titleEn}</h3>
@@ -193,8 +137,78 @@ export default function BlogManager() {
               </div>
             </div>
           </Card>
-        ))}
+        ))
+      )}
+    </div>
+  )
+
+  return (
+    <div>
+      <div className="mb-8 flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">
+            {language === "ar" ? "إدارة المدونة" : "Blog Management"}
+          </h1>
+          <p className="mt-2 text-foreground/60">
+            {language === "ar"
+              ? `${allPosts.length} مقال • ${publishedPosts.length} منشور • ${draftPosts.length} مسودة`
+              : `${allPosts.length} total • ${publishedPosts.length} published • ${draftPosts.length} drafts`}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            onClick={handleSync}
+            disabled={isSyncing || !state.isDirty}
+            className="gap-2 bg-green-600 hover:bg-green-700 disabled:opacity-50"
+          >
+            <Upload className="h-4 w-4" />
+            {isSyncing ? "Syncing..." : language === "ar" ? "مزامنة" : "Sync"}
+          </Button>
+          <Link href="/admin/blog/new">
+            <Button className="gap-2 bg-accent hover:bg-accent/90">
+              <Plus className="h-4 w-4" />
+              {language === "ar" ? "مقال جديد" : "New Post"}
+            </Button>
+          </Link>
+        </div>
       </div>
+
+      {state.isDirty && !syncStatus && (
+        <Card className="mb-6 border border-orange-500/40 bg-orange-500/10 p-4">
+          <div className="flex items-center gap-2 text-sm text-orange-600 dark:text-orange-400">
+            <AlertCircle className="h-4 w-4" />
+            <p>{language === "ar" ? "لديك تغييرات غير محفوظة" : "You have unsaved changes"}</p>
+          </div>
+        </Card>
+      )}
+
+      {syncStatus && (
+        <Card className="mb-6 border border-border/40 bg-accent/10 p-4">
+          <p className="text-sm text-foreground">{syncStatus}</p>
+        </Card>
+      )}
+
+      <Tabs defaultValue="all" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-4 max-w-md">
+          <TabsTrigger value="all">
+            {language === "ar" ? "الكل" : "All"} ({allPosts.length})
+          </TabsTrigger>
+          <TabsTrigger value="published">
+            {language === "ar" ? "منشور" : "Published"} ({publishedPosts.length})
+          </TabsTrigger>
+          <TabsTrigger value="drafts">
+            {language === "ar" ? "مسودات" : "Drafts"} ({draftPosts.length})
+          </TabsTrigger>
+          <TabsTrigger value="scheduled">
+            {language === "ar" ? "مجدول" : "Scheduled"} ({scheduledPosts.length})
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all">{renderPosts(allPosts)}</TabsContent>
+        <TabsContent value="published">{renderPosts(publishedPosts)}</TabsContent>
+        <TabsContent value="drafts">{renderPosts(draftPosts)}</TabsContent>
+        <TabsContent value="scheduled">{renderPosts(scheduledPosts)}</TabsContent>
+      </Tabs>
     </div>
   )
 }
