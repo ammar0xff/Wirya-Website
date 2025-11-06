@@ -39,7 +39,7 @@
   --foreground: #ffffff;
   --card: #1a1a1a;
   --card-foreground: #ffffff;
-  --primary: #3b82f6;
+  --primary: #2563eb;
   --primary-foreground: #0a0a0a;
   --secondary: #1e40af;
   --secondary-foreground: #ffffff;
@@ -60,6 +60,22 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* Hide scrollbar while maintaining scroll functionality */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* IE and Edge Legacy */
+* {
+  -ms-overflow-style: none;
 }
 
 /* Dynamic font switching based on language */

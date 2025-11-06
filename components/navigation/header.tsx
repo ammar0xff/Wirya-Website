@@ -15,6 +15,7 @@ function HeaderContent() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const [desktopDropdown, setDesktopDropdown] = useState<string | null>(null)
 
   const logoSrc = theme === "dark" ? "/wirya-logo-light.png" : "/wirya-logo-dark.png"
 
@@ -24,8 +25,8 @@ function HeaderContent() {
       title: language === "ar" ? "الشركة" : "Company",
       items: [
         { href: "/about", label: t.nav.about },
-        { href: "/story", label: t.nav.story },
-        { href: "/team", label: "Team" },
+        { href: "/story", label: language === "ar" ? "قصتنا" : "Our Story" },
+        { href: "/team", label: language === "ar" ? "الفريق" : "Team" },
       ],
     },
     {
@@ -33,7 +34,7 @@ function HeaderContent() {
       title: t.nav.services,
       items: [
         { href: "/services", label: t.nav.services },
-        { href: "/case-studies", label: "Case Studies" },
+        { href: "/case-studies", label: language === "ar" ? "دراسات الحالة" : "Case Studies" },
       ],
     },
     {
@@ -41,18 +42,26 @@ function HeaderContent() {
       title: language === "ar" ? "الموارد" : "Resources",
       items: [
         { href: "/blog", label: t.nav.blog },
-        { href: "/faq", label: "FAQ" },
+        { href: "/faq", label: language === "ar" ? "الأسئلة الشائعة" : "FAQ" },
       ],
     },
   ]
 
   const primaryLinks = [
     { href: "/", label: t.nav.home },
-    { href: "/services", label: t.nav.services },
-    { href: "/about", label: t.nav.about },
-    { href: "/blog", label: t.nav.blog },
     { href: "/contact", label: t.nav.contact },
   ]
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [mobileMenuOpen])
 
   return (
     <>
@@ -65,8 +74,7 @@ function HeaderContent() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className={cn("hidden lg:flex items-center gap-1", language === "ar" && "flex-row-reverse")}>
             {primaryLinks.map((link) => (
               <Link
                 key={link.href}
@@ -81,10 +89,54 @@ function HeaderContent() {
                 {link.label}
               </Link>
             ))}
+
+            {navigationSections.map((section) => (
+              <div key={section.id} className="relative">
+                <button
+                  onMouseEnter={() => setDesktopDropdown(section.id)}
+                  onMouseLeave={() => setDesktopDropdown(null)}
+                  className={cn(
+                    "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                    section.items.some((item) => pathname === item.href)
+                      ? "bg-accent text-accent-foreground"
+                      : "text-foreground/70 hover:text-foreground hover:bg-accent/50",
+                  )}
+                >
+                  {section.title}
+                  <ChevronDown className="h-3 w-3" />
+                </button>
+
+                {desktopDropdown === section.id && (
+                  <div
+                    onMouseEnter={() => setDesktopDropdown(section.id)}
+                    onMouseLeave={() => setDesktopDropdown(null)}
+                    className={cn(
+                      "absolute top-full mt-1 min-w-[200px] max-h-[400px] overflow-y-auto bg-background border border-border rounded-lg shadow-lg py-2",
+                      language === "ar" ? "right-0" : "left-0",
+                    )}
+                  >
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={cn(
+                          "block px-4 py-2 text-sm transition-colors",
+                          pathname === item.href
+                            ? "bg-accent text-accent-foreground"
+                            : "text-foreground/70 hover:bg-accent/50 hover:text-foreground",
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2">
+          <div className={cn("flex items-center gap-2", language === "ar" && "flex-row-reverse")}>
             <Button
               variant="ghost"
               size="icon"
@@ -109,7 +161,6 @@ function HeaderContent() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <div
@@ -118,11 +169,11 @@ function HeaderContent() {
           />
           <div
             className={cn(
-              "absolute top-[73px] w-full max-w-md bg-background border-b border-border shadow-lg",
-              language === "ar" ? "right-0" : "left-0",
+              "absolute top-[73px] bottom-0 w-full max-w-md bg-background border-border shadow-lg overflow-hidden",
+              language === "ar" ? "right-0 border-l" : "left-0 border-r",
             )}
           >
-            <nav className="max-h-[calc(100vh-73px)] overflow-y-auto p-6">
+            <nav className="h-full overflow-y-auto overscroll-contain p-6 pb-24">
               {/* Primary Links */}
               <div className="mb-6">
                 <div className="flex flex-col gap-2">
