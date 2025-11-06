@@ -1,14 +1,11 @@
 "use client"
 
-import { Header } from "@/components/navigation/header"
-import { Footer } from "@/components/footer"
-import TeamClient from "./team-client"
+import { useTheme } from "@/lib/theme-provider"
 import { FadeIn } from "@/components/animations/fade-in"
 import { ScaleOnScroll } from "@/components/animations/scale-on-scroll"
 import { Card } from "@/components/ui/card"
 import { Mail, Linkedin, Github } from "lucide-react"
 import Image from "next/image"
-import { useTheme } from "@/lib/theme-provider"
 
 interface TeamMember {
   id: string
@@ -60,13 +57,11 @@ const teamMembers: TeamMember[] = [
   },
 ]
 
-export default function TeamPage() {
+export default function TeamClient() {
   const { language } = useTheme()
 
   return (
-    <main className="min-h-screen bg-background">
-      <Header />
-
+    <>
       {/* Hero Section */}
       <section className="border-b border-border/40 px-4 py-16 md:py-24">
         <FadeIn>
@@ -151,9 +146,6 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
-
-      <TeamClient />
-      <Footer />
-    </main>
+    </>
   )
 }

@@ -25,6 +25,48 @@ export const metadata: Metadata = {
   description:
     siteSettings.metaDescEn || "Wirya offers innovative digital transformation and technology solutions for businesses",
   generator: "v0.app",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://wirya.com"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ar_EG",
+    alternateLocale: "en_US",
+    url: "/",
+    siteName: siteSettings.siteName || "Wirya",
+    title: siteSettings.metaTitleEn || "Wirya - Digital Transformation & Technology Solutions",
+    description:
+      siteSettings.metaDescEn ||
+      "Wirya offers innovative digital transformation and technology solutions for businesses",
+    images: [
+      {
+        url: siteSettings.logoUrl || "/logo.svg",
+        width: 1200,
+        height: 630,
+        alt: siteSettings.siteName || "Wirya",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteSettings.metaTitleEn || "Wirya - Digital Transformation & Technology Solutions",
+    description:
+      siteSettings.metaDescEn ||
+      "Wirya offers innovative digital transformation and technology solutions for businesses",
+    images: [siteSettings.logoUrl || "/logo.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: siteSettings.favicon || "/favicon.ico",
     shortcut: siteSettings.favicon || "/favicon.ico",
