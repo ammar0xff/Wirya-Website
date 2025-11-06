@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     shortcut: siteSettings.favicon || "/favicon.ico",
     apple: siteSettings.favicon?.endsWith(".png") ? siteSettings.favicon : "/apple-touch-icon.png",
   },
+  verification: {
+    google: "dqyL3FwUnUnSdMa8I1oyGQq1Xset112ksmpIAJHzYGg",
+  },
 }
 
 export default function RootLayout({
