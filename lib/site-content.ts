@@ -272,10 +272,10 @@ export const contactPageContent: ContactPageContent = {
   "businessHoursAr": "طوال الاسبوع (عدا الجمعة): 24 ساعة",
   "businessHoursEn": "All Week (except Friday): 24h",
   "socialLinks": {
-    "facebook": "https://facebook.com/wirya",
-    "twitter": "https://twitter.com/wirya",
-    "instagram": "https://instagram.com/wirya",
-    "linkedin": "https://linkedin.com/company/wirya"
+    "facebook": "https://www.facebook.com/profile.php?id=61572786470172",
+    "twitter": "https://wirya-v190.vercel.app/",
+    "instagram": "https://www.instagram.com/wirya_llc/",
+    "linkedin": "https://wirya-v190.vercel.app/"
   }
 }
 
