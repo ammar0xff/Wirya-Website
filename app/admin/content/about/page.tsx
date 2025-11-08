@@ -28,11 +28,12 @@ export default function AboutContentPage() {
       setFormData(state.aboutContent)
     } else {
       manager.setAboutContent(aboutPageContent)
+      setFormData(aboutPageContent)
     }
     setIsLoaded(true)
   }, [state.aboutContent])
 
-  if (!isLoaded) {
+  if (!isLoaded || !formData) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-muted-foreground">{language === "ar" ? "جاري التحميل..." : "Loading..."}</div>
