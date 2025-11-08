@@ -18,26 +18,17 @@ export default function AboutContentPage() {
   const { language } = useTheme()
   const { state, manager } = useContentManager()
 
-  const [formData, setFormData] = useState(state.aboutContent || aboutPageContent)
+  const [formData, setFormData] = useState(aboutPageContent)
   const [isSaving, setIsSaving] = useState(false)
   const [saveStatus, setSaveStatus] = useState("")
-  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    if (!state.aboutContent) {
-      // Initialize with default content if not present
+    if (state.aboutContent) {
+      setFormData(state.aboutContent)
+    } else {
       manager.setAboutContent(aboutPageContent)
     }
-    setIsLoaded(true)
-  }, []) // Empty dependency array - only run once on mount
-
-  if (!isLoaded) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="text-muted-foreground">{language === "ar" ? "جاري التحميل..." : "Loading..."}</div>
-      </div>
-    )
-  }
+  }, [state.aboutContent, manager])
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))

@@ -262,7 +262,59 @@ export interface SEOData {
   pages: SEOSettings[]
 }
 
-export const aboutPageContent: AboutPageContent = null
+export const aboutPageContent: AboutPageContent = {
+  missionAr: "مهمتنا هي تقديم حلول تقنية مبتكرة تساعد الشركات على النمو والتطور في العصر الرقمي",
+  missionEn:
+    "Our mission is to provide innovative technology solutions that help businesses grow and evolve in the digital age",
+  visionAr: "رؤيتنا أن نكون الشريك الأول للشركات في رحلة التحول الرقمي",
+  visionEn: "Our vision is to be the first partner for companies in their digital transformation journey",
+  values: [
+    {
+      id: "value-1",
+      titleAr: "الابتكار",
+      titleEn: "Innovation",
+      descAr: "نسعى دائماً للابتكار وتقديم حلول جديدة",
+      descEn: "We always strive for innovation and providing new solutions",
+    },
+    {
+      id: "value-2",
+      titleAr: "الجودة",
+      titleEn: "Quality",
+      descAr: "نلتزم بأعلى معايير الجودة في كل ما نقدمه",
+      descEn: "We commit to the highest quality standards in everything we deliver",
+    },
+    {
+      id: "value-3",
+      titleAr: "الشفافية",
+      titleEn: "Transparency",
+      descAr: "نؤمن بالشفافية والوضوح في التعامل مع عملائنا",
+      descEn: "We believe in transparency and clarity in dealing with our clients",
+    },
+  ],
+  achievements: [
+    {
+      id: "achievement-1",
+      numberAr: "٥٠٠+",
+      numberEn: "500+",
+      titleAr: "عميل سعيد",
+      titleEn: "Happy Clients",
+    },
+    {
+      id: "achievement-2",
+      numberAr: "١٠٠٠+",
+      numberEn: "1000+",
+      titleAr: "مشروع مكتمل",
+      titleEn: "Projects Completed",
+    },
+    {
+      id: "achievement-3",
+      numberAr: "٩٢٪",
+      numberEn: "98%",
+      titleAr: "معدل النجاح",
+      titleEn: "Success Rate",
+    },
+  ],
+}
 
 export const contactPageContent: ContactPageContent = {
   email: "wirya.corp@gmail.com",
@@ -279,7 +331,40 @@ export const contactPageContent: ContactPageContent = {
   businessHoursEn: "All week except Friday - 24 hour",
 }
 
-export const ourStoryContent: OurStoryContent = null
+export const ourStoryContent: OurStoryContent = {
+  titleAr: "قصتنا",
+  titleEn: "Our Story",
+  contentAr:
+    "بدأت رحلتنا برؤية واضحة: تمكين الشركات من خلال التكنولوجيا. منذ تأسيسنا، عملنا مع مئات الشركات لتحقيق أهدافها الرقمية.",
+  contentEn:
+    "Our journey began with a clear vision: empowering businesses through technology. Since our founding, we've worked with hundreds of companies to achieve their digital goals.",
+  milestones: [
+    {
+      id: "milestone-1",
+      year: "2020",
+      titleAr: "التأسيس",
+      titleEn: "Foundation",
+      descAr: "تأسيس الشركة وبدء تقديم الخدمات",
+      descEn: "Company establishment and service launch",
+    },
+    {
+      id: "milestone-2",
+      year: "2022",
+      titleAr: "التوسع",
+      titleEn: "Expansion",
+      descAr: "توسيع نطاق الخدمات وزيادة فريق العمل",
+      descEn: "Service expansion and team growth",
+    },
+    {
+      id: "milestone-3",
+      year: "2024",
+      titleAr: "الريادة",
+      titleEn: "Leadership",
+      descAr: "أصبحنا من الشركات الرائدة في المجال",
+      descEn: "Became a leading company in the industry",
+    },
+  ],
+}
 
 export const footerContent: FooterContent = {
   companyDescAr: "شركة رائدة في مجال التحول الرقمي والتكنولوجيا، نقدم حلولاً مبتكرة لتطوير الأعمال",
