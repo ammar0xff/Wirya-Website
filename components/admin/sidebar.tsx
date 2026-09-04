@@ -25,13 +25,14 @@ import { useState } from "react"
 export function AdminSidebar() {
   const { language } = useTheme()
   const pathname = usePathname()
-  const [expandedSections, setExpandedSections] = useState<string[]>(["content", "blog", "services"])
+  const [expandedSections, setExpandedSections] = useState<string[]>(["content"])
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => (prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]))
   }
 
   type AdminSidebarLink = {
+    kind: "link"
     icon: typeof Home
     labelAr: string
     labelEn: string
@@ -39,6 +40,7 @@ export function AdminSidebar() {
   }
 
   type AdminSidebarSection = {
+    kind: "section"
     section: string
     icon: typeof Home
     labelAr: string
@@ -48,12 +50,14 @@ export function AdminSidebar() {
 
   const menuItems: (AdminSidebarLink | AdminSidebarSection)[] = [
     {
+      kind: "link",
       icon: Home,
       labelAr: "لوحة التحكم",
       labelEn: "Dashboard",
       href: "/admin",
     },
     {
+      kind: "section",
       section: "content",
       icon: LayoutDashboard,
       labelAr: "المحتوى",
@@ -77,62 +81,70 @@ export function AdminSidebar() {
       ],
     },
     {
-      section: "blog",
+      kind: "link",
       icon: FileText,
       labelAr: "المدونة",
       labelEn: "Blog",
       href: "/admin/blog",
     },
     {
-      section: "services",
+      kind: "link",
       icon: Zap,
       labelAr: "الخدمات",
       labelEn: "Services",
       href: "/admin/services",
     },
     {
+      kind: "link",
       icon: Briefcase,
       labelAr: "الأعمال",
       labelEn: "Portfolio",
       href: "/admin/case-studies",
     },
     {
+      kind: "link",
       icon: Users,
       labelAr: "الفريق",
       labelEn: "Team",
       href: "/admin/team",
     },
     {
+      kind: "link",
       icon: MessageSquare,
       labelAr: "الآراء",
       labelEn: "Testimonials",
       href: "/admin/testimonials",
     },
     {
+      kind: "link",
       icon: HelpCircle,
       labelAr: "الأسئلة",
       labelEn: "FAQ",
       href: "/admin/faq",
     },
     {
+      kind: "link",
       icon: Mail,
       labelAr: "النشرة",
       labelEn: "Newsletter",
       href: "/admin/newsletter",
     },
     {
+      kind: "link",
       icon: FileImage,
       labelAr: "الوسائط",
       labelEn: "Media",
       href: "/admin/media",
     },
     {
+      kind: "link",
       icon: Search,
       labelAr: "SEO",
       labelEn: "SEO",
       href: "/admin/seo",
     },
     {
+      kind: "link",
       icon: Settings,
       labelAr: "الإعدادات",
       labelEn: "Settings",
@@ -156,7 +168,7 @@ export function AdminSidebar() {
           const Icon = item.icon
 
           // Section with children
-          if (item.section && item.children) {
+          if (item.kind === "section") {
             const isExpanded = expandedSections.includes(item.section)
             const hasActiveChild = item.children.some((child) => pathname.startsWith(child.href))
 

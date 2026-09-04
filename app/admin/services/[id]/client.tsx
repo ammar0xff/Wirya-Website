@@ -18,7 +18,7 @@ export default function EditService() {
   const params = useParams()
   const id = (params.id as string) || ""
 
-  const { language, isDark } = useTheme()
+  const { language } = useTheme()
   const router = useRouter()
   const { state, manager, mounted } = useContentManager()
 
