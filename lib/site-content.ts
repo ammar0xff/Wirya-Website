@@ -78,6 +78,8 @@ export interface SiteSettings {
   metaDescAr: string
   metaDescEn: string
   whatsappNumber: string // Added whatsappNumber property
+  defaultCurrency: string
+  enableEcommerce: boolean
 }
 
 export interface NewsletterSettings {
@@ -395,6 +397,8 @@ export const siteSettings: SiteSettings = {
   metaDescAr: "",
   metaDescEn: "",
   whatsappNumber: "+201067790350",
+  defaultCurrency: "SAR",
+  enableEcommerce: false,
 }
 
 export const newsletterSettings: NewsletterSettings = {

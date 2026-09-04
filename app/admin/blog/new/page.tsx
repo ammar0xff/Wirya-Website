@@ -34,7 +34,7 @@ export default function NewBlogPostPage() {
     descriptionEn: "",
     contentAr: "",
     contentEn: "",
-    imageUrl: "",
+    image: "",
     author: "",
     category: "",
     tags: "",
@@ -53,7 +53,7 @@ export default function NewBlogPostPage() {
           descriptionEn: draft.descriptionEn,
           contentAr: draft.contentAr,
           contentEn: draft.contentEn,
-          imageUrl: draft.imageUrl || "",
+          image: draft.imageUrl || "",
           author: draft.author,
           category: draft.category,
           tags: draft.tags.join(", "),
@@ -73,7 +73,7 @@ export default function NewBlogPostPage() {
         descriptionEn: formData.descriptionEn,
         contentAr: formData.contentAr,
         contentEn: formData.contentEn,
-        imageUrl: formData.imageUrl,
+        imageUrl: formData.image,
         author: formData.author,
         category: formData.category,
         tags: formData.tags
@@ -103,6 +103,7 @@ export default function NewBlogPostPage() {
         slugEn: formData.titleEn.toLowerCase().replace(/\s+/g, "-"),
         status: "published",
         date: new Date().toISOString(),
+        readTime: Math.ceil((formData.contentEn.split(" ").length || 0) / 200),
         ...formData,
         tags: formData.tags
           .split(",")
@@ -232,8 +233,8 @@ export default function NewBlogPostPage() {
               />
               <Input
                 placeholder={language === "ar" ? "رابط الصورة" : "Image URL"}
-                value={formData.imageUrl}
-                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                value={formData.image}
+                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
               />
             </div>
           </Card>

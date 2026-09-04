@@ -82,6 +82,8 @@ export interface BlogPost {
   category: string
   readTime: number
   series?: string
+  status: "draft" | "published" | "archived" | "scheduled"
+  tags: string[]
 }
 
 // Blog posts data - managed via admin panel
@@ -348,6 +350,8 @@ export interface SiteSettings {
   metaDescAr: string
   metaDescEn: string
   whatsappNumber: string
+  defaultCurrency: string
+  enableEcommerce: boolean
 }
 
 export interface NewsletterSettings {

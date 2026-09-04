@@ -54,7 +54,6 @@ export function ContentOverview() {
                 border: "1px solid var(--color-border)",
                 borderRadius: "8px",
               }}
-              textStyle={{ color: "var(--color-foreground)" }}
             />
             <Legend />
             <Bar dataKey="posts" fill="var(--color-accent)" radius={[8, 8, 0, 0]} />

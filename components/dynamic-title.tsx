@@ -35,9 +35,9 @@ export function DynamicTitle() {
     } else if (pathname.startsWith("/services/")) {
       // For individual service pages, we'll use the service name from state if available
       const serviceId = pathname.split("/services/")[1]
-      const service = state.services?.find((s: any) => s.id === serviceId)
+      const service = state.services.find((s) => s.id === serviceId)
       if (service) {
-        pageName = language === "ar" ? service.titleAr : service.titleEn
+        pageName = language === "ar" ? service.nameAr : service.nameEn
       } else {
         pageName = language === "ar" ? "الخدمة" : "Service"
       }

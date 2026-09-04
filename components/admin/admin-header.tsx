@@ -80,7 +80,7 @@ export function AdminHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button onClick={handleSyncAll} disabled={isSyncing || !state.hasContent} variant="default" size="sm">
+          <Button onClick={handleSyncAll} disabled={isSyncing || !manager.hasContent()} variant="default" size="sm">
             <RefreshCw className={`h-4 w-4 mr-2 ${isSyncing ? "animate-spin" : ""}`} />
             {isSyncing
               ? language === "ar"

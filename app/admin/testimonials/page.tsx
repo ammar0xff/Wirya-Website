@@ -31,7 +31,7 @@ export default function AdminTestimonials() {
     featured: false,
     status: "active",
   })
-  const [saveStatus, setSaveStatus] = useState<{ type: ""; message: "" }>({ type: "", message: "" })
+  const [saveStatus, setSaveStatus] = useState<{ type: string; message: string }>({ type: "", message: "" })
 
   useEffect(() => {
     setMounted(true)
@@ -47,7 +47,7 @@ export default function AdminTestimonials() {
 
   const handleSave = () => {
     if (!formData.nameAr || !formData.nameEn || !formData.contentAr || !formData.contentEn) {
-      setSaveStatus({ type: "error" as any, message: "Please fill all required fields" })
+      setSaveStatus({ type: "error", message: "Please fill all required fields" })
       return
     }
 
@@ -78,7 +78,7 @@ export default function AdminTestimonials() {
     localStorage.setItem("testimonials_data", JSON.stringify(updated))
 
     setSaveStatus({
-      type: "success" as any,
+      type: "success",
       message: editingId ? "Testimonial updated" : "Testimonial added",
     })
     setEditingId(null)

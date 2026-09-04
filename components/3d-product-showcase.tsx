@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { Environment, Float, Text3D, MeshTransmissionMaterial, Sphere } from "@react-three/drei"
-import type * as THREE from "three"
 
 interface ProductShowcaseProps {
   productName: string
@@ -11,7 +10,7 @@ interface ProductShowcaseProps {
 }
 
 function AnimatedSphere({ position, color, scrollProgress }: any) {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<any>(null)
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -39,7 +38,7 @@ function AnimatedSphere({ position, color, scrollProgress }: any) {
 }
 
 function ProductText({ text, position, scrollProgress }: any) {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<any>(null)
 
   useFrame(() => {
     if (meshRef.current) {
@@ -64,7 +63,7 @@ function ProductText({ text, position, scrollProgress }: any) {
   )
 }
 
-function Scene({ productName, features, scrollProgress }: any) {
+function Scene({ productName, features, scrollProgress }: { productName: string; features: string[]; scrollProgress: number }) {
   const { camera } = useThree()
 
   useFrame(() => {

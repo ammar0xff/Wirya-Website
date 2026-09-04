@@ -31,7 +31,22 @@ export function AdminSidebar() {
     setExpandedSections((prev) => (prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]))
   }
 
-  const menuItems = [
+  type AdminSidebarLink = {
+    icon: typeof Home
+    labelAr: string
+    labelEn: string
+    href: string
+  }
+
+  type AdminSidebarSection = {
+    section: string
+    icon: typeof Home
+    labelAr: string
+    labelEn: string
+    children: { labelAr: string; labelEn: string; href: string }[]
+  }
+
+  const menuItems: (AdminSidebarLink | AdminSidebarSection)[] = [
     {
       icon: Home,
       labelAr: "لوحة التحكم",

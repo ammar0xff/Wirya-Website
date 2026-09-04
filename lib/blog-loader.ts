@@ -8,7 +8,7 @@ export interface BlogPostFrontmatter {
   readTime: number
   image?: string
   series?: string
-  status?: "draft" | "published" | "archived"
+  status?: "draft" | "published" | "archived" | "scheduled"
   tags?: string[]
 }
 
@@ -28,7 +28,7 @@ export interface BlogPost {
   category: string
   readTime: number
   series?: string
-  status: "draft" | "published" | "archived"
+  status: "draft" | "published" | "archived" | "scheduled"
   tags: string[]
 }
 
@@ -219,7 +219,7 @@ export function getPublishedBlogPosts(): BlogPost[] {
   return getAllBlogPosts().filter((post) => post.status === "published")
 }
 
-export function getBlogPostsByStatus(status: "draft" | "published" | "archived"): BlogPost[] {
+export function getBlogPostsByStatus(status: "draft" | "published" | "archived" | "scheduled"): BlogPost[] {
   return BLOG_POSTS.filter((post) => post.status === status)
 }
 

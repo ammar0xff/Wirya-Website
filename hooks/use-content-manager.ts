@@ -16,7 +16,7 @@ export function useContentManager() {
     const unsubscribe = manager.subscribe(() => {
       setState(manager.getState())
     })
-    return unsubscribe
+    return () => { unsubscribe() }
   }, [])
 
   return {

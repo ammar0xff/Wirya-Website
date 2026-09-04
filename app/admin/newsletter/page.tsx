@@ -25,7 +25,7 @@ export default function AdminNewsletter() {
     senderName: "Wirya",
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [saveStatus, setSaveStatus] = useState<{ type: ""; message: "" }>({ type: "", message: "" })
+  const [saveStatus, setSaveStatus] = useState<{ type: string; message: string }>({ type: "", message: "" })
 
   useEffect(() => {
     setMounted(true)
@@ -44,7 +44,7 @@ export default function AdminNewsletter() {
 
   const handleDeleteSubscriber = (id: string) => {
     setSubscribers((prev) => prev.filter((s) => s.id !== id))
-    setSaveStatus({ type: "success" as any, message: "Subscriber removed" })
+    setSaveStatus({ type: "success", message: "Subscriber removed" })
   }
 
   const handleExportCSV = () => {

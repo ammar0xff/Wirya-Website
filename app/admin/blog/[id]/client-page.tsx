@@ -85,12 +85,14 @@ export default function ClientBlogPostEditPage() {
         ...formData,
         slugAr: formData.slugAr || generateSlug(formData.titleAr),
         slugEn: formData.slugEn || generateSlug(formData.titleEn),
+        status: (isNew ? "draft" : (post?.status ?? "draft")) as "draft" | "published" | "archived" | "scheduled",
+        tags: post?.tags ?? [],
       }
 
       if (isNew) {
-        manager.addBlogPost(postData)
+        manager.addBlogPost(postData as any)
       } else {
-        manager.updateBlogPost(postData.id, postData)
+        manager.updateBlogPost(postData.id, postData as any)
       }
 
       const result = await SyncService.syncBlogPosts(

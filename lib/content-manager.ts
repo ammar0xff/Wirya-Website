@@ -1,7 +1,14 @@
 import type { BlogPost } from "./blog-loader"
 import type { BlogCategory } from "./blog"
 import type { Service, ServiceCategory } from "./services"
-import type { AboutPageContent, ContactPageContent, OurStoryContent, FooterContent, SiteSettings } from "./site-content"
+import type {
+  AboutPageContent,
+  ContactPageContent,
+  OurStoryContent,
+  FooterContent,
+  SiteSettings,
+  FAQ,
+} from "./site-content"
 import { blogCategories as DEFAULT_BLOG_CATEGORIES } from "./blog"
 
 export interface ContentState {
@@ -14,6 +21,7 @@ export interface ContentState {
   storyContent: OurStoryContent | null
   footerContent: FooterContent | null
   siteSettings: SiteSettings | null
+  faqs: FAQ[]
   lastSync: string | null
   isDirty: boolean
 }
@@ -29,6 +37,7 @@ function getDefaultState(): ContentState {
     storyContent: null,
     footerContent: null,
     siteSettings: null,
+    faqs: [],
     lastSync: null,
     isDirty: false,
   }
@@ -133,6 +142,13 @@ export class ContentManager {
     this.state.siteSettings = settings
     this.state.isDirty = true
     console.log("[v0] ContentManager: Site settings updated")
+    this.notify()
+  }
+
+  setFaqs(faqs: FAQ[]) {
+    this.state.faqs = faqs
+    this.state.isDirty = true
+    console.log("[v0] ContentManager: FAQs updated")
     this.notify()
   }
 

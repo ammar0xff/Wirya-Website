@@ -96,8 +96,8 @@ export default function SiteSettingsPage() {
               </label>
               <Input
                 type="text"
-                value={formData.siteIcon}
-                onChange={(e) => handleChange("siteIcon", e.target.value)}
+                value={formData.logoUrl}
+                onChange={(e) => handleChange("logoUrl", e.target.value)}
                 placeholder="/logo.svg"
               />
             </div>

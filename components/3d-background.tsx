@@ -2,10 +2,9 @@
 
 import { Canvas, useFrame } from "@react-three/fiber"
 import { useRef, useMemo } from "react"
-import type * as THREE from "three"
 
 function FloatingParticles({ scrollY }: { scrollY: number }) {
-  const particlesRef = useRef<THREE.Points>(null)
+  const particlesRef = useRef<any>(null)
   const particleCount = 100
 
   const particles = useMemo(() => {
@@ -49,8 +48,8 @@ function FloatingParticles({ scrollY }: { scrollY: number }) {
   return (
     <points ref={particlesRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={particleCount} array={particles.positions} itemSize={3} />
-        <bufferAttribute attach="attributes-color" count={particleCount} array={particles.colors} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[particles.positions, 3]} />
+        <bufferAttribute attach="attributes-color" args={[particles.colors, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.1} vertexColors transparent opacity={0.6} sizeAttenuation />
     </points>
@@ -58,7 +57,7 @@ function FloatingParticles({ scrollY }: { scrollY: number }) {
 }
 
 function AnimatedSphere({ scrollY }: { scrollY: number }) {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<any>(null)
 
   useFrame((state) => {
     if (!meshRef.current) return
@@ -78,7 +77,7 @@ function AnimatedSphere({ scrollY }: { scrollY: number }) {
 }
 
 function AnimatedTorus({ scrollY }: { scrollY: number }) {
-  const meshRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<any>(null)
 
   useFrame((state) => {
     if (!meshRef.current) return

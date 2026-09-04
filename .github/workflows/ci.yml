@@ -24,9 +24,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # The app intentionally sets typescript.ignoreBuildErrors/eslint.ignoreDuringBuilds
-      # in next.config.mjs, so a full `type-check` gate fails on ~60 pre-existing errors
-      # unrelated to normal changes. The build gate below matches how the app deploys
-      # and still catches import/config/structural breakage.
+      - name: Type check
+        run: pnpm type-check
+
       - name: Build
         run: pnpm build

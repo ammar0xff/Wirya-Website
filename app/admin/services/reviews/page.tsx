@@ -23,7 +23,7 @@ export default function ServiceReviews() {
     clientName: "",
     rating: 5,
   })
-  const [saveStatus, setSaveStatus] = useState<{ type: ""; message: "" }>({ type: "", message: "" })
+  const [saveStatus, setSaveStatus] = useState<{ type: string; message: string }>({ type: "", message: "" })
 
   useEffect(() => {
     setMounted(true)
@@ -39,7 +39,7 @@ export default function ServiceReviews() {
 
   const handleSave = () => {
     if (!formData.clientName || !formData.ratingAr || !formData.ratingEn) {
-      setSaveStatus({ type: "error" as any, message: "Please fill required fields" })
+      setSaveStatus({ type: "error", message: "Please fill required fields" })
       return
     }
 
@@ -64,7 +64,7 @@ export default function ServiceReviews() {
     setReviews(updated)
     localStorage.setItem("service_reviews_data", JSON.stringify(updated))
     setSaveStatus({
-      type: "success" as any,
+      type: "success",
       message: editingId ? "Review updated" : "Review added",
     })
     setEditingId(null)
