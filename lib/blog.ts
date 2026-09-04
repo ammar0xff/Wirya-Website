@@ -1,20 +1,3 @@
-export interface BlogPost {
-  id: string
-  titleAr: string
-  titleEn: string
-  slugAr: string
-  slugEn: string
-  descriptionAr: string
-  descriptionEn: string
-  contentAr: string
-  contentEn: string
-  image: string
-  author: string
-  date: string
-  category: string
-  readTime: number
-}
-
 export interface BlogCategory {
   id: string
   nameAr: string
