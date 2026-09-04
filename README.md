@@ -1,179 +1,191 @@
-# Werya Website
+<div align="center">
 
-A modern, bilingual (Arabic/English) website for Werya - a digital transformation and technology solutions company.
+# Wirya
+
+### Digital Transformation & Technology Solutions
+
+**Bilingual website for [Wirya](https://wirya.com)** — Arabic & English, dark & light, admin panel with GitHub sync.
+
+[![CI](https://github.com/ammar0xff/Wirya-Website/actions/workflows/ci.yml/badge.svg)](https://github.com/ammar0xff/Wirya-Website/actions/workflows/ci.yml)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel)
+
+<br/>
+
+![Wirya Screenshot](https://placehold.co/1200x600/111111/60A5FA?text=Wirya+Website)
+
+</div>
+
+---
+
+## What is this?
+
+Wirya is a full-stack bilingual website for a digital transformation company. It includes a public-facing site, a password-protected admin panel, and a content sync system that pushes admin edits back to this repository via GitHub.
+
+**Key highlights:**
+
+- **Arabic & English** — full RTL/LTR support, every page works in both languages
+- **Admin Panel** — manage blog posts, services, FAQs, testimonials, SEO, and site settings
+- **GitHub Sync** — admin edits rewrite source files and commit directly to `main`
+- **Inline Content** — blog posts and services stored as data in code, no external database
+- **WhatsApp Integration** — direct ordering through WhatsApp from any service page
+
+---
 
 ## Quick Start
 
-### First Time Setup
+```bash
+git clone https://github.com/ammar0xff/Wirya-Website.git
+cd Wirya-Website
+pnpm install
+cp .env.example .env.local
+```
 
-1. **Clone and install**
-   \`\`\`bash
-   git clone <your-repo-url>
-   cd werya
-   pnpm install
-   \`\`\`
+Generate an admin password:
 
-2. **Configure environment variables**
-   \`\`\`bash
-   cp .env.example .env.local
-   \`\`\`
-   
-   Then follow the [Setup Guide](./SETUP.md) to configure all required variables.
+```bash
+pnpm generate-password YourSecurePassword123
+```
 
-3. **Generate admin password**
-   \`\`\`bash
-   node scripts/generate-password-hash.js YourSecurePassword123
-   \`\`\`
-   
-   Copy the output to your `.env.local` file.
+Paste the hash into `.env.local`, then:
 
-4. **Run development server**
-   \`\`\`bash
-   pnpm dev
-   \`\`\`
+```bash
+pnpm dev
+```
 
-5. **Access the site**
-   - Website: http://localhost:3000
-   - Admin panel: http://localhost:3000/admin
+Open **http://localhost:3000** for the site, **http://localhost:3000/admin** for the panel.
 
-For detailed setup instructions, see [SETUP.md](./SETUP.md).
+> Full setup guide: [SETUP.md](./SETUP.md)
 
-For deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+---
 
-## Features
+## Tech Stack
 
-- **Bilingual Support**: Full Arabic and English language support with RTL/LTR layout switching
-- **Dark/Light Mode**: Theme switching with persistent preferences
-- **Admin Panel**: Manage blog posts and services with GitHub sync
-- **Inline Content System**: Blog posts and services with markdown support stored directly in code
-- **Service Management**: Display services with detailed descriptions and pricing options
-- **Advanced Filtering**: Search and filter blog posts by category, series, and keywords
-- **Responsive Design**: Mobile-first design with smooth animations
-- **WhatsApp Integration**: Direct ordering through WhatsApp
+| | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS 4 |
+| UI | shadcn/ui + Radix primitives |
+| State | React 19 + Context API |
+| Markdown | react-markdown + remark plugins |
+| Icons | Lucide React |
+| Animation | Framer Motion |
+| 3D | React Three Fiber + Drei |
+| Charts | Recharts |
+
+---
 
 ## Project Structure
 
-\`\`\`
-├── app/                      # Next.js app directory
-│   ├── page.tsx             # Homepage
-│   ├── services/            # Services pages
-│   ├── blog/                # Blog pages
-│   └── about/               # About page
-├── components/              # React components
-│   ├── navigation/          # Header and mobile nav
-│   ├── animations/          # Animation components
-│   ├── ui/                  # shadcn/ui components
-│   ├── footer.tsx           # Footer component
-│   ├── scroll-to-top.tsx    # Scroll to top button
-│   └── markdown-renderer.tsx # Markdown renderer
-├── lib/                     # Utility functions
-│   ├── blog-loader.ts       # Blog posts with inline markdown
-│   ├── services.ts          # Services data with inline markdown
-│   ├── i18n.ts             # Translations
-│   └── theme-provider.tsx   # Theme context
-└── public/                  # Static assets
-\`\`\`
+```
+Wirya-Website/
+├── app/
+│   ├── page.tsx                     Home
+│   ├── about/                       About us
+│   ├── story/                       Our story
+│   ├── team/                        Team members
+│   ├── services/                    Services + per-service pages
+│   ├── blog/                        Blog list + individual posts
+│   ├── case-studies/                Portfolio
+│   ├── contact/                     Contact form
+│   ├── faq/                         FAQ page
+│   ├── admin/                       Password-protected admin panel
+│   │   ├── blog/                    Manage blog posts
+│   │   ├── services/                Manage services
+│   │   ├── content/                 Edit pages, footer, site settings
+│   │   ├── testimonials/            Manage testimonials
+│   │   ├── faq/                     Manage FAQs
+│   │   ├── newsletter/              Newsletter subscribers
+│   │   ├── seo/                     SEO settings
+│   │   └── settings/                Admin settings
+│   └── api/                         Route handlers (auth, sync, newsletter)
+├── components/
+│   ├── ui/                          shadcn/ui components
+│   ├── navigation/                  Header + mobile nav
+│   ├── animations/                  Scroll + reveal animations
+│   └── admin/                       Admin-specific components
+├── lib/
+│   ├── blog-loader.ts               Blog data + loaders
+│   ├── blog.ts                      Blog categories
+│   ├── services.ts                  Services data
+│   ├── site-content.ts              Page content (about, contact, footer, SEO)
+│   ├── content-manager.ts           Central content state manager
+│   ├── sync-service.ts              Admin → GitHub sync engine
+│   ├── github-sync.ts               GitHub API client
+│   ├── i18n.ts                      Arabic/English translations
+│   └── theme-provider.tsx           Theme + language context
+├── hooks/
+│   └── use-content-manager.ts       React hook for content state
+├── content/posts/                   Markdown blog posts by category
+├── public/                          Static assets
+├── scripts/                         Utility scripts
+└── styles/                          Global CSS
+```
 
-## How to Add Content
+---
 
-### Adding a Blog Post
+## How Content Works
 
-Edit `lib/blog-loader.ts` and add a new post object to the `BLOG_POSTS` array:
+There is **no database**. Content lives in source files:
 
-\`\`\`typescript
-{
-  id: "your-post-id",
-  slug: "your-post-slug",
-  category: "transformation", // or "security", "technology"
-  titleAr: "عنوان المقال بالعربي",
-  titleEn: "Article Title in English",
-  descriptionAr: "وصف قصير بالعربي",
-  descriptionEn: "Short description in English",
-  author: "Author Name",
-  date: "2024-10-31", // YYYY-MM-DD format
-  readTime: 5, // Reading time in minutes
-  image: "/image.png",
-  series: "Series Name", // Optional
-  contentAr: `# عنوان المقال
-  
-  محتوى المقال بالعربي بصيغة Markdown...
-  
-  ## قسم فرعي
-  نص إضافي...`,
-  contentEn: `# Article Title
-  
-  Article content in English using Markdown...
-  
-  ## Subsection
-  Additional text...`,
-}
-\`\`\`
+1. **Blog posts** → `content/posts/{category}/*.md`
+2. **Services** → `lib/services.ts`
+3. **Pages** → `lib/site-content.ts`
+4. **Blog types** → `lib/blog-loader.ts`
 
-The post will automatically appear on the blog page sorted by date.
+When you edit content in the admin panel, the sync engine (`lib/sync-service.ts`) rewrites these files and pushes to GitHub. The site rebuilds with the new content.
 
-### Adding a Service
+```
+Admin Panel  →  SyncService  →  Rewrites lib/*.ts + content/posts/*.md  →  Git Push  →  Vercel Rebuild
+```
 
-Edit `lib/services.ts` and add a new service object to the `services` array:
+> Detailed sync docs: [SYNC_SYSTEM.md](./SYNC_SYSTEM.md)
 
-\`\`\`typescript
-{
-  id: "your-service-id",
-  category: "support", // Choose from: support, transformation, consulting, optimization, security, development
-  nameAr: "اسم الخدمة بالعربي",
-  nameEn: "Service Name in English",
-  descriptionAr: "وصف قصير بالعربي",
-  descriptionEn: "Short description in English",
-  price: 999, // Base price
-  currency: "SAR",
-  image: "/your-image.jpg", // Add image to /public folder
-  detailedDescAr: "وصف تفصيلي بالعربي",
-  detailedDescEn: "Detailed description in English",
-  // Optional: Add long markdown descriptions
-  longDescriptionAr: `# وصف طويل بالعربي
-  
-  محتوى مفصل بصيغة Markdown...`,
-  longDescriptionEn: `# Long Description in English
-  
-  Detailed content in Markdown...`,
-  options: [
-    { id: "basic", nameAr: "باقة أساسية", nameEn: "Basic Package", priceModifier: 0 },
-    { id: "pro", nameAr: "باقة احترافية", nameEn: "Pro Package", priceModifier: 500 },
-  ],
-  whatsappLink: "https://wa.me/96612345678?text=I%20want%20to%20order%20YourService",
-}
-\`\`\`
+---
 
-The service will automatically appear on the services page.
+## Commands
 
-## Building and Deployment
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start dev server on :3000 |
+| `pnpm build` | Production build |
+| `pnpm start` | Serve production build |
+| `pnpm type-check` | Run TypeScript type checking |
+| `pnpm generate-password <pass>` | Hash a password for admin login |
 
-### Local Development
+---
 
-\`\`\`bash
-pnpm install
-pnpm dev
-\`\`\`
+## Environment Variables
 
-### Build for Production
+| Variable | Description |
+|---|---|
+| `ADMIN_EMAIL` | Admin login email |
+| `ADMIN_PASSWORD_HASH` | Bcrypt hash of admin password |
+| `NEXT_PUBLIC_SITE_URL` | Site URL (e.g. `https://wirya.com`) |
+| `GITHUB_TOKEN` | GitHub PAT with repo access |
+| `GITHUB_OWNER` | GitHub username or org |
+| `GITHUB_REPO` | Repository name (Wirya-Website) |
 
-\`\`\`bash
-pnpm run build
-pnpm start
-\`\`\`
+See [SETUP.md](./SETUP.md) for full configuration.
 
-### Deploy to Vercel
+---
 
-Click the "Publish" button in v0 or connect your GitHub repository to Vercel.
+## Deployment
 
-## Technologies Used
+The site deploys automatically to **Vercel** on every push to `main`.
 
-- **Next.js 16** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS v4** - Styling
-- **shadcn/ui** - UI components
-- **React Markdown** - Markdown rendering
-- **Lucide Icons** - Icon library
+1. Connect the repo to Vercel
+2. Set environment variables in the Vercel dashboard
+3. Push to `main` — Vercel builds and deploys automatically
+
+CI runs **type-check + build** on every push and PR.
+
+---
 
 ## License
 
-© 2025 Werya. All rights reserved.
+© 2025 Wirya. All rights reserved.
